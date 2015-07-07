@@ -15,5 +15,7 @@
         <string name="error_field_required">This field is required</string>
         <string name="btn_logout_from_google">Logout from Google</string>
         <string name="btn_revoke_access">Revoke Access</string>
+    <string name="title_avtivity_nav">Corro</string>
+    <string name="title_activity_nav">Corro</string>
 
 </resources>

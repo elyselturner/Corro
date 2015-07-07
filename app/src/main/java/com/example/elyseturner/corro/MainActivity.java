@@ -1,9 +1,7 @@
 package com.example.elyseturner.corro;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.IntentSender.SendIntentException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,7 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+//import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,23 +35,18 @@ import java.io.InputStream;
 public class MainActivity extends Activity implements ConnectionCallbacks, OnConnectionFailedListener, View.OnClickListener {
 
     private static final int RC_SIGN_IN = 0;
-    // Logcat tag
+
     private static final String TAG = "SignInActivity";
-
-    // Profile pic image size in pixels
     private static final int PROFILE_PIC_SIZE = 400;
-
-    // Google client to interact with Google API
     private GoogleApiClient mGoogleApiClient;
 
     private boolean mIntentInProgress;
-
     private boolean mSignInClicked;
 
     private ConnectionResult mConnectionResult;
 
     private SignInButton btnSignIn;
-    private Button btnSignOut, btnRevokeAccess;
+//    private Button btnSignOut, btnRevokeAccess;
     private ImageView imgProfilePic;
     private TextView txtName, txtEmail;
     private LinearLayout llProfileLayout;
@@ -63,18 +56,29 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_sign_in);
 
+        settingLoginContentView();
+        apiBuilder();
+    }
+
+
+    private void settingLoginContentView() {
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-        btnSignOut = (Button) findViewById(R.id.btn_sign_out);
-        btnRevokeAccess = (Button) findViewById(R.id.btn_revoke_access);
+//        btnSignOut = (Button) findViewById(R.id.btn_sign_out);
+//        btnRevokeAccess = (Button) findViewById(R.id.btn_revoke_access);
         imgProfilePic = (ImageView) findViewById(R.id.imgProfilePic);
         txtName = (TextView) findViewById(R.id.txtName);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
         llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 
         btnSignIn.setOnClickListener(this);
-        btnSignOut.setOnClickListener(this);
-        btnRevokeAccess.setOnClickListener(this);
+//        btnSignOut.setOnClickListener(this);
+//        btnRevokeAccess.setOnClickListener(this);
+    }
 
+
+
+
+    private void apiBuilder() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -83,7 +87,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                 .addApi(Fitness.RECORDING_API)
                 .addApi(Fitness.HISTORY_API)
                 .addApi(Fitness.SESSIONS_API)
-                
+                .addApi(Fitness.BLE_API)
+                .addApi(Fitness.CONFIG_API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
     }
 
@@ -103,15 +108,13 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sign_in:
-                // Signin button clicked
                 signInWithGplus();
+
                 break;
             case R.id.btn_sign_out:
-                // Signout button clicked
                 signOutFromGplus();
                 break;
             case R.id.btn_revoke_access:
-                // Revoke access button clicked
                 revokeGplusAccess();
                 break;
         }
@@ -126,13 +129,9 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         }
 
         if (!mIntentInProgress) {
-            // Store the ConnectionResult for later usage
             mConnectionResult = result;
 
             if (mSignInClicked) {
-                // The user has already clicked 'sign-in' so we attempt to
-                // resolve all
-                // errors until the user is signed in, or they cancel.
                 resolveSignInError();
             }
         }
@@ -164,6 +163,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         // Update the UI after signin
         updateUI(true);
 
+
+
     }
 
     @Override
@@ -172,26 +173,20 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         updateUI(false);
     }
 
-    /**
-     * Updating the UI, showing/hiding buttons and profile layout
-     * */
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
             btnSignIn.setVisibility(View.GONE);
-            btnSignOut.setVisibility(View.VISIBLE);
-            btnRevokeAccess.setVisibility(View.VISIBLE);
+//            btnSignOut.setVisibility(View.VISIBLE);
+//            btnRevokeAccess.setVisibility(View.VISIBLE);
             llProfileLayout.setVisibility(View.VISIBLE);
         } else {
             btnSignIn.setVisibility(View.VISIBLE);
-            btnSignOut.setVisibility(View.GONE);
-            btnRevokeAccess.setVisibility(View.GONE);
+//            btnSignOut.setVisibility(View.GONE);
+//            btnRevokeAccess.setVisibility(View.GONE);
             llProfileLayout.setVisibility(View.GONE);
         }
     }
 
-    /**
-     * Sign-in into google
-     * */
     private void signInWithGplus() {
         if (!mGoogleApiClient.isConnecting()) {
             mSignInClicked = true;
@@ -199,9 +194,6 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         }
     }
 
-    /**
-     * Method to resolve any signin errors
-     * */
     private void resolveSignInError() {
         if (mConnectionResult.hasResolution()) {
             try {
@@ -216,8 +208,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private void getProfileInformation() {
         try {
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                Person currentPerson = Plus.PeopleApi
-                        .getCurrentPerson(mGoogleApiClient);
+                Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
                 String personName = currentPerson.getDisplayName();
                 String personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
@@ -230,12 +221,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
                 txtName.setText(personName);
                 txtEmail.setText(email);
 
-                // by default the profile url gives 50x50 px image only
-                // we can replace the value with whatever dimension we want by
-                // replacing sz=X
-                personPhotoUrl = personPhotoUrl.substring(0,
-                        personPhotoUrl.length() - 2)
-                        + PROFILE_PIC_SIZE;
+                personPhotoUrl = personPhotoUrl.substring(0,personPhotoUrl.length() - 2) + PROFILE_PIC_SIZE;
 
                 new LoadProfileImage(imgProfilePic).execute(personPhotoUrl);
 
@@ -248,9 +234,6 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         }
     }
 
-    /**
-     * Background Async task to load user profile picture from url
-     * */
     private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

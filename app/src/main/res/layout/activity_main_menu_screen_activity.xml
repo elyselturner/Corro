@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:text="jhvjwvwjhvhveh2v"
         android:layout_weight="1"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:elevation="4dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -23,7 +24,8 @@
        android:layout_height="wrap_content"
        android:text="wfkbfkfw3f"
        android:layout_weight="1"
-       android:clickable="true"/>
+       android:clickable="true"
+       android:elevation="4dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -36,5 +38,6 @@
         android:layout_height="wrap_content"
         android:text="jhdfjehfwf"
         android:layout_weight="1"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:elevation="4dp"/>
 </LinearLayout>
