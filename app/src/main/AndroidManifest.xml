@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.FITNESS_ACTIVITY_READ_WRITE" />
+    <uses-permission android:name="android.permission.FITNESS_BODY_READ_WRITE" />
+    <uses-permission android:name="android.permission.FITNESS_LOCATION_READ_WRITE" />
 
     <application
         android:allowBackup="true"
@@ -33,5 +36,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainMenuScreenActivity"
+            android:label="@string/title_activity_nav">
+        </activity>
+
     </application>
 </manifest>
