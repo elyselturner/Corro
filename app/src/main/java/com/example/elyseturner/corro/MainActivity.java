@@ -47,7 +47,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     private void settingLoginContentView() {
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-        
+
         llProfile = (LinearLayout) findViewById(R.id.llMainNav);
         checkWeather = (Button) findViewById(R.id.btnWeather);
         newRun = (Button) findViewById(R.id.btnNewRun);
