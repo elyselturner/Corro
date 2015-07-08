@@ -6,9 +6,7 @@ import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -28,7 +26,6 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     private static final int RC_SIGN_IN = 0;
 
-    private static final String TAG = "SignInActivity";
     private GoogleApiClient mGoogleApiClient;
 
     private boolean mIntentInProgress;
@@ -37,7 +34,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private ConnectionResult mConnectionResult;
 
     private SignInButton btnSignIn;
-    private Button forecast, pastRuns, newRun;
+    private Button pastSession, checkWeather, newRun;
     private LinearLayout llProfile;
 
     @Override
@@ -50,15 +47,17 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     private void settingLoginContentView() {
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-        forecast = (Button) findViewById(R.id.txtEmail);
-        newRun = (Button) findViewById(R.id.txtMiddle);
-        pastRuns = (Button) findViewById(R.id.txtName);
-        llProfile = (LinearLayout) findViewById(R.id.llProfile);
+        
+        llProfile = (LinearLayout) findViewById(R.id.llMainNav);
+        checkWeather = (Button) findViewById(R.id.btnWeather);
+        newRun = (Button) findViewById(R.id.btnNewRun);
+        pastSession = (Button) findViewById(R.id.btnPastRuns);
+
 
         btnSignIn.setOnClickListener(this);
-        forecast.setOnClickListener(this);
+        pastSession.setOnClickListener(this);
         newRun.setOnClickListener(this);
-        pastRuns.setOnClickListener(this);
+        checkWeather.setOnClickListener(this);
 
     }
 
@@ -93,6 +92,13 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         switch (v.getId()) {
             case R.id.btn_sign_in:
                 signInWithGplus();
+                break;
+            case R.id.btnWeather:
+                break;
+            case R.id.btnNewRun:
+                break;
+            case R.id.btnPastRuns:
+                break;
         }
     }
 
