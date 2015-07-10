@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/llMainNav"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
         android:weightSum="3" >
@@ -18,11 +18,12 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:textSize="20dp"
-                android:background="#f78f1e"
-                android:text="skjdbkwdb" />
+                android:background="@color/primary"
+                android:text="weather" />
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/dividerColor"/>
             <Button
                 android:id="@+id/btnNewRun"
                 android:layout_weight="1"
@@ -30,12 +31,13 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:textSize="20dp"
-                android:background="#f78f1e"
-                android:text="skjdbkwdb"
+                android:background="@color/primary"
+                android:text="new run"
                 android:clickable="true"/>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/dividerColor"/>
             <Button
                 android:id="@+id/btnPastRuns"
                 android:layout_weight="1"
@@ -43,8 +45,8 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:textSize="18dp"
-                android:background="#f69f7a"
-                android:text="skjdbkwdb"
+                android:background="@color/primary"
+                android:text="past runs"
                 android:clickable="true"/>
     </LinearLayout>
 

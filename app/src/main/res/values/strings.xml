@@ -15,5 +15,9 @@
         <string name="error_field_required">This field is required</string>
         <string name="btn_logout_from_google">Logout from Google</string>
         <string name="btn_revoke_access">Revoke Access</string>
+    <string name="test">user is signed in!</string>
+    <string name="hourly_weather">Hourly Weather</string>
+    <string name="new_run">Shake and Bake</string>
+    <string name="past_runs">I ran where?</string>
 
 </resources>

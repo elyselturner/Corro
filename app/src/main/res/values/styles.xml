@@ -1,8 +1,37 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <resources>
+        <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+            <item name="colorPrimary">@color/primary</item>
+            <!-- Customize your theme here. -->
+        </style>
+
+    <style name="primaryText">
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
     </style>
+
+    <style name="buttonText">
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/opacityWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
+    </style>
+
+    <style name="thinDivider">
+        <item name="android:height">1dp</item>
+        <item name="android:background">@color/dividerColor</item>
+        <item name="android:textAppearance">?android:attr/divider</item>
+    </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/greyAccent</item>
+        <item name="android:textColorPrimary">@color/opacityWhite</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
 
 </resources>
