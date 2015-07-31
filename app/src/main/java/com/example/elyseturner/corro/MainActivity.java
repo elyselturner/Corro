@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -17,7 +16,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.plus.Plus;
 
@@ -28,7 +26,6 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     private static final int RC_SIGN_IN = 0;
 
-    private static final String TAG = "SignInActivity";
     private GoogleApiClient mGoogleApiClient;
 
     private boolean mIntentInProgress;
@@ -37,8 +34,8 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private ConnectionResult mConnectionResult;
 
     private SignInButton btnSignIn;
-    private Button forecast, pastRuns, newRun;
-    private LinearLayout llProfile;
+    private Button pastSession, checkWeather, newRun;
+    private LinearLayout llMainNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -50,15 +47,17 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
 
     private void settingLoginContentView() {
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-        forecast = (Button) findViewById(R.id.txtEmail);
-        newRun = (Button) findViewById(R.id.txtMiddle);
-        pastRuns = (Button) findViewById(R.id.txtName);
-        llProfile = (LinearLayout) findViewById(R.id.llProfile);
+
+        llMainNav = (LinearLayout) findViewById(R.id.llMainNav);
+        checkWeather = (Button) findViewById(R.id.btnWeather);
+        newRun = (Button) findViewById(R.id.btnNewRun);
+        pastSession = (Button) findViewById(R.id.btnPastRuns);
+
 
         btnSignIn.setOnClickListener(this);
-        forecast.setOnClickListener(this);
+        pastSession.setOnClickListener(this);
         newRun.setOnClickListener(this);
-        pastRuns.setOnClickListener(this);
+        checkWeather.setOnClickListener(this);
 
     }
 
@@ -93,7 +92,33 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         switch (v.getId()) {
             case R.id.btn_sign_in:
                 signInWithGplus();
+                break;
+            case R.id.btnWeather:
+                //call logic
+                //on connection success switch to new activity
+                //for now let's just let us switch to the new activity
+                Intent a = new Intent( MainActivity.this, HourlyWeather.class);
+                startActivity(a);
+                break;
+            case R.id.btnNewRun:
+                //session logic
+                //on success switch to new activity
+                //for now let's just let us switch to the new activity
+                Intent b = new Intent( MainActivity.this, NewRun.class);
+                startActivity(b);
+                break;
+            case R.id.btnPastRuns:
+                //session logic
+                //on success switch to new activity
+                //for now let's just let us switch to the new activity
+                Intent c = new Intent( MainActivity.this, RunningHistory.class);
+                startActivity(c);
+                break;
         }
+    }
+
+    private void getHourlyWeather() {
+
     }
 
     @Override
@@ -130,6 +155,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
         mSignInClicked = false;
         Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
 
+
         updateUI(true);
     }
 
@@ -142,10 +168,10 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
             btnSignIn.setVisibility(View.GONE);
-            llProfile.setVisibility(View.VISIBLE);
+            llMainNav.setVisibility(View.VISIBLE);
         } else {
             btnSignIn.setVisibility(View.VISIBLE);
-            llProfile.setVisibility(View.GONE);
+            llMainNav.setVisibility(View.GONE);
         }
     }
 
