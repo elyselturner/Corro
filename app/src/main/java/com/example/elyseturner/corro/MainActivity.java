@@ -153,9 +153,7 @@ public class MainActivity extends Activity implements ConnectionCallbacks, OnCon
     @Override
     public void onConnected(Bundle arg0) {
         mSignInClicked = false;
-        Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
-
-
+        Toast.makeText(this, "User is connected!", Toast.LENGTH_SHORT).show();
         updateUI(true);
     }
 
